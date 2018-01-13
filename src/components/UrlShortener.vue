@@ -15,6 +15,9 @@
     <h5 v-clipboard:copy="shorternUrl" v-tooltip="{ content: 'Click to copy'}">
       {{ shorternUrl }}
     </h5>
+    <h5>
+       {{ shorternCount }}
+    </h5>
   </div>
 </template>
 
@@ -30,6 +33,7 @@
           url: ''
         },
         shorternUrl: '',
+        shorternCount: '',
         show: true,
         shorteningUrl: false,
         btnTextShortenUrl: 'Shorten It!',
@@ -38,13 +42,18 @@
       }
     },
     methods: {
-      onShortenUrl (evt) {
+      async onShortenUrl (evt) {
         evt.preventDefault()
         this.shorteningUrl = true
-        this.data = {url: this.form.url}
+        // get client ip address with ipify.org
+        const ip = await axios.get('https://api.ipify.org')
+        // construct data to post to backend
+        this.data = {url: this.form.url, ip: ip.data, platform: navigator.userAgent}
         this.btnTextShortenUrl = 'Shortening your url ...'
+        // start posting data to backend
         axios.post(this.apiUrl, this.data).then(response => {
-          this.shorternUrl = response.data
+          this.shorternUrl = response.data.url
+          this.shorternCount = `Shortern ${response.data.shorternCount} times`
           this.form.url = ''
           // for firefox
           this.enableButton()
@@ -55,11 +64,11 @@
         }).finally(() => {
           this.enableButton()
         })
+      },
+      enableButton () {
+        this.btnTextShortenUrl = 'Shorten It!'
+        this.shorteningUrl = false
       }
-    },
-    enableButton () {
-      this.btnTextShortenUrl = 'Shorten It!'
-      this.shorteningUrl = false
     }
   }
 </script>
