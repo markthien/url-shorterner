@@ -1,30 +1,20 @@
-# url-shorterner
+# Url Shorterner Frontend Built using Vue.js 2
 
-> shortern any url
+### This is a simple url shorterner clientside that built with vue.js 2
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+### Follow steps below to start the clientside (assuming you have npm and node.js already installed)
+#### 1. Install libraries in package.json by entering the following command
 ```
+yarn install
+```
+#### 2. After done installing, run the following command to start the server
+```
+npm run dev
+```
+#### For the server side, please go to https://github.com/markthien/url-shorterner-server to install/run
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Creators
+#### Mark Thien
+
+## Copyright and license
+#### Code released under the MIT License. Docs released under Creative Commons.
